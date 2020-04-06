@@ -37,4 +37,3 @@ self.addEventListener('fetch', function (event) {
         }
     }));
 });
-let a = ''

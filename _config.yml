@@ -104,7 +104,7 @@ deploy:
   repo:  https://github.com/yanstars/yanstars.github.io
  
   branch: master
-  message: test
+  message: add neat
 
 
 search:

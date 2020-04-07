@@ -1,13 +1,15 @@
 ---
-title:  初试hexo
+title: 初试hexo
 date: 2020 04 01
-categories: 
+categories:
     - hexo
 
-tags: 
+tags:
     - hexo
-updated: 2020 04 04 
+updated: 2020 04 04
 ---
+
+#### [HEXO document](https://hexo.io/zh-cn/do)
 
 #### 相关环境
 
@@ -62,8 +64,7 @@ updated: 2020 04 04
             limit: 10000
     ...
     ```
-    > <font size= 2 color=#aaaaaa> 备注 </font>
-    > <font size= 2  color=#aaaaaa> 官方说的安装插件后会自动生成`search.xml`文件，然后需要放在`hexo`的根目录 ，主题插件才会生效 </font> 
+    > <font size= 2 color=#aaaaaa> 备注 </font> > <font size= 2  color=#aaaaaa> 官方说的安装插件后会自动生成`search.xml`文件，然后需要放在`hexo`的根目录 ，主题插件才会生效 </font>
     > <font size= 2 color=#aaaaaa >我这里安装后并没有该文件，然后直接 `copy` 配置到`exo`全局配置里，也生效了！ </font>
 -   新建 search 页面
     `$ hexo new page search`
@@ -85,9 +86,11 @@ updated: 2020 04 04
         #是否启用
         enable: true
     ```
+
     > <font size=2 color=#aaaaaa>这里我也没找到索引文件,直接使用上述配置。</font>
 
 ---
+
 #### 创建标签页
 
 -   `$ hexo new page tags`
@@ -99,10 +102,8 @@ updated: 2020 04 04
         ---
     ```
 
-*更多 [hexo-theme-diaspora](https://github.com/Fechin/hexo-theme-diaspora) 配置*
+_更多 [hexo-theme-diaspora](https://github.com/Fechin/hexo-theme-diaspora) 配置_
 
-*更多[hexo](https://hexo.io/zh-cn/docs/configuration)配置*
+_更多[hexo](https://hexo.io/zh-cn/docs/configuration)配置_
 
-
-
-<font size=2 color=#aaaaaa></font> 
+<font size=2 color=#aaaaaa></font>

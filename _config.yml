@@ -107,8 +107,27 @@ deploy:
   message: test
 
 
-  search:
+search:
     path: search.xml
     field: post
     format: html
     limit: 10000
+
+neat_enable: true
+
+neat_js:
+    enable: true
+    mangle: true
+    output:
+    compress:
+    exclude:
+        - '*.min.js'
+neat_css:
+    enable: true
+    exclude:
+        - '*.min.css'
+neat_html:
+    enable: true
+    exclude: 
+
+    

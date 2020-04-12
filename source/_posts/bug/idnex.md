@@ -27,6 +27,9 @@ updated: 2020 04 05
 -   `git checkout . == rm -rf *`
 -   `git submodule init`
 -   `git submodule update`
+-   git 设置 http/https 代理后,取消代理设置, git clone 任然走代理端口导致 clone 失败(未解决) -- 卸载重装
+-   git clone 时编码错误 (未解决)-- 卸载重装
+    `git clone failed Failed to convert “” to ACE; could not convert string to UTF-8`
 
 #### VUE
 

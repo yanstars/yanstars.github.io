@@ -47,5 +47,8 @@ git config --global --unset https.proxy
 
 ```md
 # [http "https://github.com"]
-# 	proxy = socks5://127.0.0.1:2080
+
+# proxy = socks5://127.0.0.1:2080
 ```
+
+_最新版 坚果云_

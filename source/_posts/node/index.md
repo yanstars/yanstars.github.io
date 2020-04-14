@@ -29,3 +29,41 @@ updated: 2020 04 05
 
 -   `npm i -g nodemon`
     `nodemon app.js`
+
+-   `npm i -g pm2`
+    `pm2 start app.js`
+
+#### 事件循环
+
+1. 外部输入数据
+2. 轮询阶段(poll)
+3. 检查阶段(check)
+4. 关闭事件回调阶段(close callback)
+5. 定时器检测阶段(timer)
+6. I/O 事件回调阶段(I/O callbacks)
+7. 闲置阶段(idle, prepare)
+8. 轮询阶段（按照该顺序反复运行）…
+
+#### 各个阶段
+
+-   timers 阶段：这个阶段执行 timer（setTimeout、setInterval）的回调
+-   I/O callbacks 阶段：处理一些上一轮循环中的少数未执行的 I/O 回调
+-   idle, prepare 阶段：仅 node 内部使用
+-   poll 阶段：获取新的 I/O 事件, 适当的条件下 node 将阻塞在这里
+-   check 阶段：执行 setImmediate() 的回调
+-   close callbacks 阶段：执行 socket 的 close 事件回调
+
+#### 对比浏览器
+
+-   浏览器和 Node 环境下，microtask 任务队列的执行时机不同
+-   Node 端，microtask 在事件循环的各个阶段之间执行
+-   浏览器端，microtask 在事件循环的 macrotask 执行完之后执行
+
+-   当每个阶段完成后，如果存在 nextTick 队列，就会清空队列中的所有回调函数，并且优先于其他 microtask 执行
+-   process.nextTick 和 Promise 的回调函数，追加在本轮循环，即同步任务一旦执行完成，就开始执行它们。而 setTimeout、setInterval、setImmediate 的回调函数，追加在次轮循环。
+-   [链接](https://blog.csdn.net/Fundebug/article/details/86487117)
+
+#### 传递参数
+
+-   基本类型 传递的参数赋值给函数的局部变量
+-   引用类型 复制地址 局部变量的变化会反映到函数外部

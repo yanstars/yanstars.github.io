@@ -77,3 +77,7 @@ inet_protocols = all
 -   docker 任务
 
 `15 8 * * * docker run --shm-size 1G -i --rm -v /root/popu/index.js:/app/index.js alekzonder/puppeteer:latest`
+
+修改目录结构
+
+`docker run --shm-size 1G --rm -v /root/popu:/app alekzonder/puppeteer:latest node my_script.js`

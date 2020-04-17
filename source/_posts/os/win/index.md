@@ -75,3 +75,47 @@ updated: 2020 04 14
 > 有钱了还是换个正版吧,应该之前清理电脑又把什么配置文件，注册表，系统服务啥啥的破坏了。然后在查看 User Profile Service 服务时，还发现了 2345 看图王 的服务注册信息。真是吐了，臭名昭著。
 
 > 最后感谢这个大哥。[源地址](https://zhidao.baidu.com/question/1770296959514572980.html)
+
+#### 关于 win10 中 vscode 远程开发 ssh 连接 远程主机的遇到的问题
+
+首先说会遇到的问题 :
+
+-   问题 1:`Bad owener or permission on ..`
+-   问题 2: `"WARNING: UNPROTECTED PRIVATE KEY FILE!"`
+-   问题 3: 在 `vscode` 终端提示 管道符写入失败
+
+先说 问题 1 和 问题 2 。
+
+-   `vscode` 远程开发时 会使用优先 windows 自带的 `openssh` 向远程主机 `ssh` 进行连接。
+-   而连接的主机 名称 ip 配置信息都默认保存在 user/.ssh/config 这个文件中
+-   原因就是 `openssh` 在读写 user/.ssh/config 这个文件时，发生了文件的权限问题。导致 `openssh` 读取 config 配置信息失败，所以连接自然就失败了。
+-   同样， 在 win10 cmd 和 `powershell` 中 ，运行 `ssh` 时，系统优先会使用 `openssh` 这个工具而不是 git 自带的 `ssh` 工具。所以也会出现`Bad owener or permission on ..`的问题。所以在 cmd 和 `powershell` 中 ，你同样会连接失败。
+-   所以，归根结底就是 `openssh` 的问题。
+
+那么针对 `vscode` 远程开发 连接失败的问题, 解决办法就有多种了.
+
+-   Q1.既然 `vscode` 默认使用 `openssh` 进行连接。 而使用系统自带的 `openssh` 又会出现问题。那 `vscode` 中咱就不用 `openssh`
+
+> A1： 让 `vscode` 远程开发插件不使用 win 系统默认的 `ssh` 工具(`openssh`)，修改 `vscode` 插件 remote 的配置信息 remote ssh：path 为 git 的 `ssh` 目录。这样的话 `vscode` 可以进行远程连接。 git 可以远程连接 。但是使用 cmd ，`powershell` 连接时同样会出现 <font color=red>问题 1 </font>的情况。
+
+-   Q2.如果 vscode 仍要使用默认的 `openssh` 进行连接，上面说到了 ，`vscode` 在使用 `openssh` 连接时默认使用配置文件/user/.ssh/config。然而问题就出在了这个文件。那咱就不用这个文件。
+
+> A2：细心的人已经发现了，在 `vscode`中,选择配置文件时，有三个选项。【/user/.ssh/config】, 【c:/programData/ssh/config】(备注，这个文件在系统 c 盘中可能会不存在), 【用户自定义一个文件】。 修改 `vscode` 中插件 remote 的配置 remote ssh：config file 为 c:/programData/ssh/config。 这样 `vscode`中可以连接成功。但是 win10 中 cmd 和 `powershell` 不能连接。
+
+-   Q3.修改 win10 系统的默认 `ssh` 连接工具为 git 的 `ssh` 工具。(区别 Q1- Q1 是在 `vscode` 中修改 `vscode` 默认 `ssh` 连接工具，配置完成后，`vscode` 可以连接，但是 win10 中 cmd 和 `powershell` 不能连接。
+
+> A3： 具体办法我也没有尝试。按大致思路就是修改环境变量 path 。具体办法应该是把 git 下 `ssh` 放在 用户环境变量中 PATH 中 第一行。让其高于 ope`ssh`。默认优先级 同级目录前面高于后面，不同级目录中子目录高于父级。好像是。。可以试试吧，不行的话再同时配置一份 `vscode` ssh/config 文件。
+
+[^_^]: # ( // TODO 有时间试试 Q3 )
+
+-   Q4. 针对 <font color=red> 问题 2</font> 的解决办法 。csdn 上好多都把这个问题解决办法粘贴到 <font color=red> 问题 1</font>上。不知道咋想的。
+
+> 具体参考 vscode 官网 。 远程开发插件 ssh 权限错误修复问题。[\_fixing-ssh-file-permission-errors](https://code.visualstudio.com/docs/remote/troubleshooting#_fixing-ssh-file-permission-errors)
+
+###### 反正 win10 这个`openssh` 挺坑的。选择重装的话去 github 找找 `openssh` 然后安装后，记得配置环境变量。
+
+##### 个人肯定希望 vscode 和 cmd / powershell 都能使用 openssh 目前我的解决办法 即 A2 + sss
+
+-   sss: 删掉 /user/.ssh/config 文件
+-   /user/.ssh/config 粘贴到 c:programData/ssh/config
+-   设置 vscode remote ssh: config file 为 c:programData/ssh/config 这样 vscode cmd 都能成功使用 openssh 工具。

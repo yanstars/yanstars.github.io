@@ -40,14 +40,14 @@ categories: os
 
 -   把下面两行
 
-```
+```config
 inet_interfaces = localhost
 inet_protocols = all
 ```
 
 -   改为
 
-```
+```config
 inet_interfaces = all
 inet_protocols = all
 ```
@@ -66,7 +66,6 @@ inet_protocols = all
 
 > `15 8 * * * docker run --shm-size 1G -i -t --rm -v /root/popu/index.js:/app/index.js alekzonder/puppeteer:latest`
 > 定时任务 docker 启动容器报错
-
 > 报错：the input device is not a TTY
 
 方案: 任务启动容器命令中去掉 `-t` 参数
@@ -81,3 +80,30 @@ inet_protocols = all
 修改目录结构
 
 `docker run --shm-size 1G --rm -v /root/popu:/app alekzonder/puppeteer:latest node my_script.js`
+
+### 问题记录 3
+
+关于配置 ssh 免密登录后仍然需要密码的解决问题
+
+-   sshd_config 禁用 root 账户登录
+
+```bash
+vim  /etc/ssh/sshd_config
+PermitRootLogin yes #允许root 免密登录
+PubkeyAuthentication yes # 允许免密登录
+AuthorizedKeysFile .ssh/authorized_keys  # 密钥位置
+AuthorizedPrincipalsFile none
+AuthorizedKeysCommand none
+AuthorizedKeysCommandUser nobody
+```
+
+-   /.ssh 权限问题
+
+```bash
+chmod 700 ~/.ssh/
+chmod 600 ~/.ssh/authorized_keys
+```
+
+-   重启 ssd 服务
+
+`service sshd restart`

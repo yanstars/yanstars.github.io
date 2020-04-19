@@ -41,7 +41,7 @@ git config --global --unset https.proxy
 
 `git config --global http.https://github.com.proxy socks5://127.0.0.1:1080`
 
-#### 取消代理
+#### 取消针对 github 的代理
 
 `git config --global --unset http.https://github.com.proxy`
 
@@ -51,4 +51,4 @@ git config --global --unset https.proxy
 # proxy = socks5://127.0.0.1:2080
 ```
 
-_最新版 坚果云_
+#### 最新版 坚果云

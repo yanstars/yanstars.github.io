@@ -16,7 +16,7 @@ updated: 2020 04 04
 -   chrome://net-internals/#events
 -   chrome://inspect/#service-workers
 
-#### 一般来说，如果看到 provisional headers are shown 这个提示，说明这个请求并没有发送出去。
+#### 一般来说，如果看到 provisional headers are shown 这个提示，说明这个请求并没有发送出去
 
 -   请求被某些扩展如 Adblock 拦截了，请求被浏览器插件拦截。解决方案：用 chrome://net-internals 来帮助你查找被屏蔽的请求以及可能的原因。（本人发现现在这个用不了了）
 -   请求被墙了

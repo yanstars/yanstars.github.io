@@ -29,7 +29,7 @@ sessionStorage.clear();
 
 #### indexedDb
 
-**注意回调函数中 this 指向**
+#### 注意回调函数中 this 指向
 
 ```js
 //   1. 创建并打开一个数据库

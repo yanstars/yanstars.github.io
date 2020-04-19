@@ -2,9 +2,11 @@
 
 title: chrome-extention
 date: 2020 04 15
-categories: - web
-
-tags: - web - js - chrome
+categories:  web
+tags:
+    - web 
+    - js 
+    - chrome
 
 ---
 

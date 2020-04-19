@@ -1,3 +1,5 @@
+<!-- markdownlint-disable -->
+
 ---
 title: windows 相关
 date: 2020 03
@@ -71,9 +73,7 @@ updated: 2020 04 14
 9：系统还原到你想要的点，完成！
 
 > 没有提示输入密码,成功回到了 `root`桌面
-
 > 有钱了还是换个正版吧,应该之前清理电脑又把什么配置文件，注册表，系统服务啥啥的破坏了。然后在查看 User Profile Service 服务时，还发现了 2345 看图王 的服务注册信息。真是吐了，臭名昭著。
-
 > 最后感谢这个大哥。[源地址](https://zhidao.baidu.com/question/1770296959514572980.html)
 
 #### 关于 win10 中 vscode 远程开发 ssh 连接 远程主机的遇到的问题
@@ -89,7 +89,8 @@ updated: 2020 04 14
 -   `vscode` 远程开发时 会使用优先 windows 自带的 `openssh` 向远程主机 `ssh` 进行连接。
 -   而连接的主机 名称 ip 配置信息都默认保存在 user/.ssh/config 这个文件中
 -   原因就是 `openssh` 在读写 user/.ssh/config 这个文件时，发生了文件的权限问题。导致 `openssh` 读取 config 配置信息失败，所以连接自然就失败了。
--   同样， 在 win10 cmd 和 `powershell` 中 ，运行 `ssh` 时，系统优先会使用 `openssh` 这个工具而不是 git 自带的 `ssh` 工具。所以也会出现`Bad owener or permission on ..`的问题。所以在 cmd 和 `powershell` 中 ，你同样会连接失败。
+-   同样， 在 win10 cmd 和 `powershell` 中 ，运行 `ssh` 时，系统优先会使用 `openssh` 这个工具而不是 git 自带的 `ssh` 工具。所以也会出现`Bad owener or permission on ..`的问题。所以在 cmd 和
+ `powershell` 中 ，你同样会连接失败。
 -   所以，归根结底就是 `openssh` 的问题。
 
 那么针对 `vscode` 远程开发 连接失败的问题, 解决办法就有多种了.
@@ -112,7 +113,7 @@ updated: 2020 04 14
 
 > 具体参考 vscode 官网 。 远程开发插件 ssh 权限错误修复问题。[\_fixing-ssh-file-permission-errors](https://code.visualstudio.com/docs/remote/troubleshooting#_fixing-ssh-file-permission-errors)
 
-###### 反正 win10 这个`openssh` 挺坑的。选择重装的话去 github 找找 `openssh` 然后安装后，记得配置环境变量。
+##### 反正 win10 这个`openssh` 挺坑的。选择重装的话去 github 找找 `openssh` 然后安装后，记得配置环境变量
 
 ##### 个人肯定希望 vscode 和 cmd / powershell 都能使用 openssh 目前我的解决办法 即 A2 + sss
 

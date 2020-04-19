@@ -4,7 +4,7 @@ date: 2020 04 09
 tags: docker
 ---
 
-![docker操作导向](/images/doucker.jpg)
+![docker操作导向](/images/docker.jpg)
 
 #### 关于挂在宿主机(windows)目录到容器内
 
@@ -25,7 +25,7 @@ tags: docker
 
 `docker run [OPTIONS] IMAGE [COMMAND][arg...]`
 
-#### OPTIONS 说明：
+#### OPTIONS 说明
 
 -   -a stdin: 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项；
 -   -d: 后台运行容器，并返回容器 ID；
@@ -53,3 +53,17 @@ tags: docker
     `docker run -p 80:80 -v /data:/data -d nginx:latest`
 -   使用镜像 nginx:latest 以交互模式启动一个容器,在容器内执行/bin/bash 命令。
     `docker run v - i -p 80:80 -v /data:/data -d nginx:latest /bin/bash`
+
+#### 镜像站
+
+```json
+{
+    "registry-mirrors": [
+        "https://registry.docker-cn.com",
+        "http://hub-mirror.c.163.com",
+        "https://docker.mirrors.ustc.edu.cn",
+        "http://f1361db2.m.daocloud.io",
+        "https://f0bqmo17.mirror.aliyuncs.com"
+    ]
+}
+```

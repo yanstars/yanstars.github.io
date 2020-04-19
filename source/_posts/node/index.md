@@ -35,14 +35,14 @@ updated: 2020 04 05
 
 #### 事件循环
 
-1. 外部输入数据
-2. 轮询阶段(poll)
-3. 检查阶段(check)
-4. 关闭事件回调阶段(close callback)
-5. 定时器检测阶段(timer)
-6. I/O 事件回调阶段(I/O callbacks)
-7. 闲置阶段(idle, prepare)
-8. 轮询阶段（按照该顺序反复运行）…
+1 外部输入数据
+2 轮询阶段(poll)
+3 检查阶段(check)
+4 关闭事件回调阶段(close callback)
+5 定时器检测阶段(timer)
+6 I/O 事件回调阶段(I/O callbacks)
+7 闲置阶段(idle, prepare)
+8 轮询阶段（按照该顺序反复运行）…
 
 #### 各个阶段
 

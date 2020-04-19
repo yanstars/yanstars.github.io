@@ -42,10 +42,7 @@ updated: 2020 04 04
 
 -   `$ cd blogname`
 -   `$ vi _config.yml`
--   修改 hexo 全局配置
-    ```
-    theme: diaspora
-    ```
+-   修改 hexo 全局配置 `theme: diaspora`
 
 ---
 
@@ -55,22 +52,26 @@ updated: 2020 04 04
     `$ cnpm install hexo-generator-searchdb --save`
 
 -   配置 hexo 全局配置文件
-    ```
+
+    ```md
     ... (省略部分)
-        search:
-            path: search.xml
-            field: post
-            format: html
-            limit: 10000
+    search:
+    path: search.xml
+    field: post
+    format: html
+    limit: 10000
     ...
     ```
-    > <font size= 2 color=#aaaaaa> 备注 </font> > <font size= 2  color=#aaaaaa> 官方说的安装插件后会自动生成`search.xml`文件，然后需要放在`hexo`的根目录 ，主题插件才会生效 </font>
-    > <font size= 2 color=#aaaaaa >我这里安装后并没有该文件，然后直接 `copy` 配置到`exo`全局配置里，也生效了！ </font>
+
+    > <font size= 2 color=#aaaaaa> 备注 </font> >
+    > <font size= 2  color=#aaaaaa> 官方说的安装插件后会自动生成`search.xml`文件，然后需要放在`hexo`的根目录 ，主题插件才会生效 </font> > <font size= 2 color=#aaaaaa >我这里安装后并没有该文件，然后直接 `copy`
+    > 配置到`exo`全局配置里，也生效了！ </font>
+
 -   新建 search 页面
     `$ hexo new page search`
 -   编辑新建的页面设置类型为 serach
 
-    ```
+    ```md
         ---
         title: search
         date: 2014-12-22 12:39:04
@@ -95,7 +96,8 @@ updated: 2020 04 04
 
 -   `$ hexo new page tags`
 -   修改新建的页面类型为 tags
-    ```
+
+    ```md
         ---
         title: tags
         type: "tags"

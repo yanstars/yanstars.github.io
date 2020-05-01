@@ -4,7 +4,12 @@ date: 2020 04 09
 tags: docker
 ---
 
-![docker操作导向](/images/docker.jpg)
+#### ![docker操作导向](/images/docker.jpg)
+
+-   [win | linux 配置镜像加速](#配置镜像站加速)
+-   [windows 下挂载容器路劲问题](<#关于挂在宿主机(windows)目录到容器内>)
+
+-   [nginx 容器示例](#nginx容器示例)
 
 #### 关于挂在宿主机(windows)目录到容器内
 
@@ -19,9 +24,7 @@ tags: docker
 
 ---
 
-#### docker run ：创建一个新的容器并运行一个命令
-
-#### 语法
+#### docker run ：创建一个新的容器并运行一个命令,语法如下
 
 `docker run [OPTIONS] IMAGE [COMMAND][arg...]`
 
@@ -43,7 +46,7 @@ tags: docker
 -   --link=[]: 添加链接到另一个容器；
 -   --expose=[]: 开放一个端口或一组端口；
 
-#### 实例
+#### nginx 容器示例
 
 -   使用 docker 镜像 nginx:latest 以后台模式启动一个容器,并将容器命名为 mynginx。
     `docker run --name mynginx -d nginx:latest`
@@ -53,8 +56,11 @@ tags: docker
     `docker run -p 80:80 -v /data:/data -d nginx:latest`
 -   使用镜像 nginx:latest 以交互模式启动一个容器,在容器内执行/bin/bash 命令。
     `docker run v - i -p 80:80 -v /data:/data -d nginx:latest /bin/bash`
+-   映射多个端口 `-p 80:70 -p 90:90` 前提是容器内部开发了此端口
 
-#### 镜像站
+#### 配置镜像站加速
+
+-   windows
 
 ```json
 {
@@ -67,3 +73,10 @@ tags: docker
     ]
 }
 ```
+
+-   centos
+
+`vim /etc/docker/daemon.json`
+
+将 windosw 上述配置 copy 进去 ,然后重启`docker` 服务
+`service docker restart`

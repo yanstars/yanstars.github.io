@@ -1,15 +1,13 @@
 <!-- markdownlint-disable -->
 
 ---
+
 title: windows 相关
 date: 2020 03
-tags:
-    - os
-    - windows
+tags: - os - windows
 categories: os
 
-updated: 2020 04 14
----
+## updated: 2020 04 14
 
 -   wox
 -   everything
@@ -28,7 +26,12 @@ updated: 2020 04 14
 
 ---
 
-##### (win10 企业版 LTSC)
+## 目录
+
+-   [win10-企业版-LTSC 无法切换用户](#win10-企业版-LTSC无法切换用户)
+-   [科学上网-chromeGo](#科学上网-chromeGo)
+
+##### win10-企业版-LTSC-无法切换用户
 
 1.添加了个新用户 `visitor` 然后注销现在的用户 `root` 登陆`visitor`
 
@@ -46,7 +49,7 @@ updated: 2020 04 14
 
 5.最后找到了一个优秀大哥的解决办法,成功进来了。[源地址](https://zhidao.baidu.com/question/1770296959514572980.html)
 
-##### 尝试
+###### 尝试
 
 1：制作一个启动安装盘，想办法进入命令提示符界面
 2：进入系统盘符，如：C:\
@@ -90,7 +93,7 @@ updated: 2020 04 14
 -   而连接的主机 名称 ip 配置信息都默认保存在 user/.ssh/config 这个文件中
 -   原因就是 `openssh` 在读写 user/.ssh/config 这个文件时，发生了文件的权限问题。导致 `openssh` 读取 config 配置信息失败，所以连接自然就失败了。
 -   同样， 在 win10 cmd 和 `powershell` 中 ，运行 `ssh` 时，系统优先会使用 `openssh` 这个工具而不是 git 自带的 `ssh` 工具。所以也会出现`Bad owener or permission on ..`的问题。所以在 cmd 和
- `powershell` 中 ，你同样会连接失败。
+    `powershell` 中 ，你同样会连接失败。
 -   所以，归根结底就是 `openssh` 的问题。
 
 那么针对 `vscode` 远程开发 连接失败的问题, 解决办法就有多种了.
@@ -120,3 +123,10 @@ updated: 2020 04 14
 -   sss: 删掉 /user/.ssh/config 文件
 -   /user/.ssh/config 粘贴到 c:programData/ssh/config
 -   设置 vscode remote ssh: config file 为 c:programData/ssh/config 这样 vscode cmd 都能成功使用 openssh 工具。
+
+#### 科学上网-chromeGo
+
+-   0. 首先这是个死循环。 `github` 上 `chromego` 没有科学过的话，是很难完整下载下来使用的。
+
+-   1. `https://d37du0a4tqdc0g.cloudfront.net/` 下载这个 `Lantern` 安装好运行，然后每个月就能使用 500M 的高速流量。
+-   2. 打开 `github` 搜索 `fanqiang` 找到 `star` 的一个。 下载压缩包。 解压。阅读使用文档。

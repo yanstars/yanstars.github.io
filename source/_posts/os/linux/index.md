@@ -11,6 +11,12 @@ categories: os
 
 -   docker
 
+### 目录
+
+-   [使用 gitlab 测试邮件通知的时候报错](#问题记录1)
+-   [docker 启动容器报错: the input device is not a TTY](#问题记录2)
+-   [ssh 免密登录后登录仍然需要密码](#问题记录3)
+
 ### 工具
 
 -   crontab(定时任务)
@@ -28,13 +34,13 @@ categories: os
  service crond status
 ```
 
-### 问题记录 1
+### 问题记录1
 
--   使用 gitlab 测试邮件通知的时候报这个错
+-   使用 gitlab 测试邮件通知的时候报错
 
 > sendmail: fatal: parameter inet_interfaces: no local interface >found for ::1
 
--   网上搜索要修改这个文件
+-   修改这个文件
 
 `vim /etc/postfix/main.cf`
 
@@ -62,7 +68,7 @@ inet_protocols = all
 
 [原文链接](https://blog.csdn.net/github_37673306/java/article/details/84755551)
 
-### 问题记录 2
+### 问题记录2
 
 > `15 8 * * * docker run --shm-size 1G -i -t --rm -v /root/popu/index.js:/app/index.js alekzonder/puppeteer:latest`
 > 定时任务 docker 启动容器报错
@@ -80,6 +86,7 @@ inet_protocols = all
 修改目录结构
 
 `docker run --shm-size 1G --rm -v /root/popu:/app alekzonder/puppeteer:latest node my_script.js`
+`docker run --shm-size 1G --rm -v /root/mydocker/popp:/app alekzonder/puppeteer:latest node app.js`
 
 ### 问题记录 3
 

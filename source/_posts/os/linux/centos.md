@@ -1,5 +1,5 @@
 ---
-title: linux 相关
+title: centos 相关
 date: 2020 01
 tags:
     - os

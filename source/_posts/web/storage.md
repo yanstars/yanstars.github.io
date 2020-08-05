@@ -18,7 +18,7 @@ localStorage.removeItem(key);
 localStorage.clear();
 ```
 
-#### sessionStorage (string)
+#### sessionStorage (string) 关闭窗口后失效
 
 ```js
 sessionStorage.setItem(key, value);

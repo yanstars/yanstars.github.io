@@ -1,30 +1,24 @@
-<!-- markdownlint-disable -->
-
 ---
-
-title: windows 相关
-date: 2020 03
-tags: - os - windows
+title: windows环境
+date: 2020 04 15
 categories: os
-
-## updated: 2020 04 14
+tags:
+    - os
+    - windows
+---
 
 -   wox
 -   everything
 -   git
 -   sourcetree
--   node
 -   nvm-forwindows
 -   mobaxterm
 -   vscode
 -   docker
 -   坚果云
 -   cmder
--   pandownload
 -   ApowerRECPortable
 -   navicat
-
----
 
 ## 目录
 

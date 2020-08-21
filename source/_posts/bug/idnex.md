@@ -51,3 +51,8 @@ updated: 2020 04 05
 -   Es6 属性名表达式如果是一个对象，默认情况下会自动将对象转为字符串 `[object Object]`
 -   [keyA] 和 [keyB] 得到的都是`[object Object]`，所以 [keyB] 会把 [keyA] 覆盖掉，而 obj 最后只有一个
     `[object Object]` 属性。
+
+#### chrome
+
+-   chrome 插件会影响浏览器的缓存策略(未排查)
+-   lightHouse viewer 需要梯子才能用

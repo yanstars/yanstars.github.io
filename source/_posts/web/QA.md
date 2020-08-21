@@ -40,9 +40,9 @@ tags:
     -   flex-basis 定义子元素在分配剩余空间之前的元素基本长度 优先级高于 width
     -   align-self 定义该元素与交叉轴不一样的对齐方式 stretch h 和 height 冲突
 
-#### css 绘制三角形
+#### css
 
--   利用盒模型 隐藏不需要的 border 部分
+-   绘制三角形 利用盒模型 隐藏不需要的 border 部分
 
 ```css
 width: 0;
@@ -50,6 +50,20 @@ height: 0;
 border-left: 50px solid transparent;
 border-right: 50px solid transparent;
 border-bottom: 100px solid red;
+```
+
+-   不给高充满页面
+
+```css
+div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+/* 或*/
+div {
+    flex: 1;
+}
 ```
 
 #### 转数字

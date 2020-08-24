@@ -61,3 +61,8 @@ updated: 2020 04 05
 
 -   chrome 插件会影响浏览器的缓存策略(未排查)
 -   lightHouse viewer 需要梯子才能用
+
+### react Native
+
+-   顶部导航文字居中问题
+-   fildlist 底部 margin 和 padding 挤压

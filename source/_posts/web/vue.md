@@ -21,6 +21,16 @@ tags:
 -   解析器 Compile: 扫描和解析每个节点的相关指令，并根据初始化模板数据以及初始化相应的订阅器
 -   订阅者 Watcher : 收到属性的变化通知并执行相应的函数，从而更新视图
 
+### 组件传值
+
+-   v-bind / prop
+-   eventBus Vue.prototype.bus = new Vue() / this.bus.$on | this.bus.$emit
+-   provide / inject
+-   this.$refs.child / this.$parent
+-   vuex
+-   localstroage
+-   vm.$attrs和vm.$listeners
+
 #### vue 笔记
 
 -   监听器 Observe
@@ -35,6 +45,7 @@ tags:
 ##### 响应式数据
 
 ```js
+// [pop,push,shift,unshift,splice,reduce,reverse]
 var vm = new Vue({
     data: {
         items: ['a', 'b', 'c'],
@@ -50,3 +61,20 @@ vm.items.length = 2; // 不是响应性的
 
 第二类
 `vm.items.splice(newLength)`
+
+### router
+
+-   原理 : 通过这两种方式改变地址栏不会发送请求
+-   #hash
+    -   通过 window.hashchange 事件监听
+-   history
+    -   pushState()
+    -   replaceState(name,title,'')
+        window.popstate 事件监听
+
+### 渲染过程
+
+1 把模板编译为 render 函数
+2 实例进行挂载, 根据根节点 render 函数的调用，递归的生成虚拟 dom
+3 对比虚拟 dom，渲染到真实 dom
+4 组件内部 data 发生变化，组件和子组件引用 data 作为 props 重新调用 render 函数，生成虚拟 dom, 返回到步骤 3

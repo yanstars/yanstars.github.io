@@ -112,6 +112,39 @@ tags:
 -   dynamic-import 动态引入
 -   globalThis
 
+### chromeV8
+
+-   垃圾回收
+
+    -   短期内存空间
+        -   方法: 新生代/老生代替换
+        -   结果 多次存活并交换的对象，存入常用内存空间
+    -   常用内存空间
+        -   方法: 分片 + 增量标记清除 毫秒级别
+
+-   工作原理
+
+    -   parse 解析器 -> 成 AST 语法树
+    -   interpreter 解释 -> 字节码 (可直接执行，出现一次) 执行后清除 AST 内存空间
+    -   根据字节码优化 编译成 -> 机器码(可直接执行,出现多次的热点函数，优化并记录。)
+
+    ```js
+    function add(x, y) {
+        return x + y;
+    }
+
+    add(1, 5); //字节码执行
+    add(1, 6); // 优化记录函数并优化成机器码（速度更快，消耗更少）
+    add(5, 6); // 优化后的机器码执行
+    add('hello', 'Tom'); //  回退 变成字节码执行   体现出TS的优势
+    ```
+
+### Important
+
+-   WeakSet 只能储存对象， WeakMap 键名只能是对象
+-   js 代码预解析，等号右边不解析,对比 import(静态加载)
+-   隐式转换会调用 valueOf 和 toString 方法
+
 ### 参考
 
 -   [2020](https://blog.csdn.net/duyujian706709149/article/details/104014127)

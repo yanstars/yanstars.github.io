@@ -193,39 +193,6 @@ console.log(child1 instanceof Parent); // true
 //         缺点：调用了两次父类构造函数
 ```
 
-#### 0811
-
--   笔试
-
-    -   一个元素一个按钮,元素垂直居中. 点击按钮后,元素一秒后,水平左右移动 100px 旋转 90 度 动画持续 100ms [A1](#AA1)
-    -   实现一个函数 , 判断对象中的属性来自哪一个 原型链对象 [A2](#AA2)
-
-        ```js
-        let foo = { a: 1 };
-        let bar = Object.create(foo);
-        bar.b = 2;
-        let baz = Object.create(bar);
-        baz.c = 3;
-        console.log('object :>> ', getProtoType(baz, 'c') == baz); // true
-        console.log('object :>> ', getProtoType(baz, 'b') == bar); // true
-        console.log('object :>> ', getProtoType(baz, 'a') == foo); // true
-        ```
-
-    -   div 上下布局 底部固定高度 ,顶部自适应
-
--   面试
-    -   position 值 区别 以及黏性定位 : sticky
-    -   判断一个数组的方法 Array.isArray() / Object.prototype.toString.call() 注意 typeof [] == 'object'
-    -   事件绑定的方法, 优点 , html 中 onclick / js 中 addEventListener (多个顺序执行) 和 onEvetnt (多个后者覆盖前者)
-    -   事件传递顺序: 父级捕获-> 自身绑定顺序->父级冒泡
-    -   http 缓存相关 200 304 区别 200 返回 max-age 发现失效 如果有 Last-Modified,则再次向 web 服务器请求时带上头 If-Modified-Since ,服务器对比 If-Modified-Since 和文件最后修改时间 返回 200 或者 304
-    -   网络请求放在什么阶段? / 子组件? 父组件?
-    -   js 中 this 指向问题, 显示修改 this 方式以及区别
-    -   connection:keep-alive 介绍
-    -   前端性能优化 / 打包方面的优化
-    -   linux 查看网络以及端口占用
-    -   linux 杀掉进程
-
 ### AA1
 
 ```css

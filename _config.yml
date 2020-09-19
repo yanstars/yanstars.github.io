@@ -27,12 +27,12 @@ source_dir: source
 public_dir: public
 tag_dir: tags
 archive_dir: archives
-test_dir: testpage
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render: diy
+skip_render: "diy/**/*"
 
+# skip_render: "mypage/**/*"
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
@@ -42,8 +42,11 @@ external_link:
   field: site # Apply to the whole site
   exclude: ''
 filename_case: 0
-render_drafts: false
+render_drafts: true
 post_asset_folder: true
+marked:
+  prependRoot: true
+  postAsset: true
 relative_link: false
 future: true
 highlight:

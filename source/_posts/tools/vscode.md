@@ -4,9 +4,22 @@ date: 2020-09-15
 tags: tools
 ---
 
-## vscode
+## vscode 编辑器
 
-#### extensions
+### step
+
+1. 终端进入项目根目录
+2. ```bash
+   mkdir .vscode && curl https://raw.githubusercontent.com/yanstars/vscode-setting/master/.vscode/global_settings.json --output .vscode/settings.json && curl https://raw.githubusercontent.com/yanstars/vscode-setting/master/.vscode/extensions.json --output .vscode/extensions.json
+   ```
+3. `vscode`内调出命令面板 `ctrl +command +p`
+4. 输入 `重新加载窗口`
+5. 重复步骤 `3`
+6. 输入：`扩展 推荐的扩展`
+7. 左侧扩展栏 , 找到工作区推荐,点击右侧不远处的 `一键下载`
+8. 重复步骤 `3` `4`
+
+#### extensions 扩展
 
 ```json
 {
@@ -59,7 +72,7 @@ tags: tools
 }
 ```
 
-#### settings
+#### settings 设置
 
 ```json
 {
@@ -145,15 +158,32 @@ tags: tools
 }
 ```
 
-### Step
+---
 
-1. 终端进入项目根目录
-2. ```bash
-   mkdir .vscode && curl https://raw.githubusercontent.com/yanstars/vscode-setting/master/.vscode/global_settings.json --output .vscode/settings.json && curl https://raw.githubusercontent.com/yanstars/vscode-setting/master/.vscode/extensions.json --output .vscode/extensions.json
-   ```
-3. `vscode`内调出命令面板 `ctrl +command +p`
-4. 输入 `重新加载窗口`
-5. 重复步骤 `3`
-6. 输入：`扩展 推荐的扩展`
-7. 左侧扩展栏 , 找到工作区推荐,点击右侧不远处的 `一键下载`
-8. 重复步骤 `3` `4`
+## webpack 自动化插件格式化(针对多文件基础规范)
+
+#### prettier(2 选 1)
+
+#### eslint
+
+#### prettier eg:
+
+- `npm i prettier -D `
+- package.json 中 script 加入
+  ` "lint": "npx prettier --write src/",`
+- 根目录新建 `.prettierrc.json`文件
+
+```json
+{
+	"printWidth": 160,
+	"jsxBracketSameLine": true,
+	"useTabs": true,
+	"singleQuote": false,
+	"trailingComma": "none",
+	"arrowParens": "avoid",
+	"vueIndentScriptAndStyle": true,
+	"semi": false
+}
+```
+
+- `npm run lint`

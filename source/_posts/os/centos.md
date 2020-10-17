@@ -2,24 +2,34 @@
 title: centos 相关
 date: 2020 01
 tags:
-    - os
-    - linux
+  - os
+  - linux
 categories: os
 ---
 
+### 查询端口占用
+
+- lsof -i:80
+- netstat -nlp|grep :80
+
+- ps -ef | grep 8246
+- ps -x | grep 8246
+
+- kill -9 pid
+
 ### 相关环境
 
--   docker
+- docker
 
 ### 目录
 
--   [使用 gitlab 测试邮件通知的时候报错](#问题记录1)
--   [docker 启动容器报错: the input device is not a TTY](#问题记录2)
--   [ssh 免密登录后登录仍然需要密码](#问题记录3)
+- [使用 gitlab 测试邮件通知的时候报错](#问题记录1)
+- [docker 启动容器报错: the input device is not a TTY](#问题记录2)
+- [ssh 免密登录后登录仍然需要密码](#问题记录3)
 
 ### 工具
 
--   crontab(定时任务)
+- crontab(定时任务)
 
 `* * * * * commond`
 
@@ -34,41 +44,41 @@ categories: os
  service crond status
 ```
 
-### 问题记录1
+### 问题记录 1
 
--   使用 gitlab 测试邮件通知的时候报错
+- 使用 gitlab 测试邮件通知的时候报错
 
 > sendmail: fatal: parameter inet_interfaces: no local interface >found for ::1
 
--   修改这个文件
+- 修改这个文件
 
 `vim /etc/postfix/main.cf`
 
--   把下面两行
+- 把下面两行
 
 ```config
 inet_interfaces = localhost
 inet_protocols = all
 ```
 
--   改为
+- 改为
 
 ```config
 inet_interfaces = all
 inet_protocols = all
 ```
 
--   再重启 postfix
+- 再重启 postfix
 
 `service postfix start`
 
--   查看任务日志
+- 查看任务日志
 
 `vim /var/spool/mail/root`
 
 [原文链接](https://blog.csdn.net/github_37673306/java/article/details/84755551)
 
-### 问题记录2
+### 问题记录 2
 
 > `15 8 * * * docker run --shm-size 1G -i -t --rm -v /root/popu/index.js:/app/index.js alekzonder/puppeteer:latest`
 > 定时任务 docker 启动容器报错
@@ -79,7 +89,7 @@ inet_protocols = all
 
 [原文链接](https://www.cnblogs.com/killall007/p/9494189.html)
 
--   docker 任务
+- docker 任务
 
 `15 8 * * * docker run --shm-size 1G -i --rm -v /root/popu/index.js:/app/index.js alekzonder/puppeteer:latest`
 
@@ -92,7 +102,7 @@ inet_protocols = all
 
 关于配置 ssh 免密登录后仍然需要密码的解决问题
 
--   sshd_config 禁用 root 账户登录
+- sshd_config 禁用 root 账户登录
 
 ```bash
 vim  /etc/ssh/sshd_config
@@ -104,13 +114,13 @@ AuthorizedKeysCommand none
 AuthorizedKeysCommandUser nobody
 ```
 
--   /.ssh 权限问题
+- /.ssh 权限问题
 
 ```bash
 chmod 700 ~/.ssh/
 chmod 600 ~/.ssh/authorized_keys
 ```
 
--   重启 ssd 服务
+- 重启 ssd 服务
 
 `service sshd restart`

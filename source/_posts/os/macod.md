@@ -7,6 +7,7 @@ tags: os
 
 - zsh
 - wget
+- brew
 - nvm
 - docker
 - yabai

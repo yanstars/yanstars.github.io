@@ -15,14 +15,14 @@ tags:
 
     ```html
     <template>
-    	<div class="counter">
-    		<p>count: {{ count }}</p>
-    		<p>NewVal (count + 2): {{ countDouble }}</p>
-    		<button @click="inc">Increment</button>
-    		<button @click="dec">Decrement</button>
-    		<p>Message: {{ msg }}</p>
-    		<button @click="changeMessage()">Change Message</button>
-    	</div>
+      <div class="counter">
+        <p>count: {{ count }}</p>
+        <p>NewVal (count + 2): {{ countDouble }}</p>
+        <button @click="inc">Increment</button>
+        <button @click="dec">Decrement</button>
+        <p>Message: {{ msg }}</p>
+        <button @click="changeMessage()">Change Message</button>
+      </div>
     </template>
     ```
 
@@ -99,30 +99,30 @@ tags:
 
   ```html
   <template>
-  	<div>
-  		<label>Name: </label>
-  		<input :value="name" @input="updateName($event.target.value)" />
-  		<label>Age: </label>
-  		<input :value="age" @input="updateAge($event.target.value)" />
-  	</div>
+    <div>
+      <label>Name: </label>
+      <input :value="name" @input="updateName($event.target.value)" />
+      <label>Age: </label>
+      <input :value="age" @input="updateAge($event.target.value)" />
+    </div>
   </template>
   ```
 
   ```js
   export default {
-  	props: {
-  		name: String,
-  		age: Number,
-  	},
-  	setup(props, { emit }) {
-  		const updateName = value => {
-  			emit('update:name', value)
-  		}
-  		const updateAge = value => {
-  			emit('update:age', +value)
-  		}
-  		return { updateName, updateAge }
-  	},
+    props: {
+      name: String,
+      age: Number,
+    },
+    setup(props, { emit }) {
+      const updateName = value => {
+        emit('update:name', value)
+      }
+      const updateAge = value => {
+        emit('update:age', +value)
+      }
+      return { updateName, updateAge }
+    },
   }
   ```
 
@@ -130,6 +130,6 @@ tags:
 
   ```html
   <template>
-  	<survey-form v-model:name="name" v-model:age="age"> {" "} </survey-form>
+    <survey-form v-model:name="name" v-model:age="age"> {" "} </survey-form>
   </template>
   ```

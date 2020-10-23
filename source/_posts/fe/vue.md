@@ -32,22 +32,21 @@ tags:
 #### vue 笔记
 
 - 监听器 Observe
-  - 抽象一个 defineReactive 劫持数据方法 Object.defineProperty(obj,key,{
-    get:()=>{}
-    }) ，启动同时初始化一个订阅者容器 dep ， 储存对应的订阅者 watcher
-  - defineReactive 中递归遍历子节点，对所有节点进行 Observe()监听操作
-- 工具函数 判断对象类型 object.prototype.toString.call(obj).slice(8,-1)
-- 创建一个不在原型链上的空对象 Object.create(null)
-- 对象 getter 代理
+  - 抽象一个 `defineReactive` 劫持数据方法 `Object.defineProperty`，启动同时初始化一个订阅者容器 dep ， 储存对应的订阅者 watcher
+  - `defineReactive` 中递归遍历子节点，对所有节点进行 Observe()监听操作
+- 工具函数 判断对象类型 `object.prototype.toString.call(obj).slice(8,-1)`
+- 创建一个不在原型链上的空对象` Object.create(null)`
+- 对象 `getter` 代理
 
-##### 响应式数据
+##### 响应式数据注意点
 
 ```js
 // [pop,push,shift,unshift,splice,reduce,reverse]
+
 var vm = new Vue({
-	data: {
-		items: ['a', 'b', 'c'],
-	},
+  data: {
+    items: ['a', 'b', 'c'],
+  },
 })
 vm.items[1] = 'x' // 不是响应性的
 vm.items.length = 2 // 不是响应性的
@@ -76,3 +75,42 @@ vm.items.length = 2 // 不是响应性的
 2. 实例进行挂载, 根据根节点 render 函数的调用，递归的生成虚拟 dom
 3. 对比虚拟 dom，渲染到真实 dom
 4. 组件内部 data 发生变化，组件和子组件引用 data 作为 props 重新调用 render 函数，生成虚拟 dom, 返回到步骤 3
+
+### 技巧
+
+- 自定义 dispath 方法向上传值 适用于表单校验
+
+  ```js
+  this.dispatch('formItem', 'on-form-change', this.value)
+  ```
+
+- 父组件传递动态参数给动态组件
+  ⚠️
+
+  > 此时代码在.js 文件内
+  > 项目内需要配合 babel 使用 jsx 语法
+  > 如果写在。vue 文件中，必须去掉 template 标签
+
+  ```js
+  // 使用 functional 组件
+  //  render 函数动态渲染
+  export default {
+    functional: true,
+    // TODO  待深入
+    render: function (h, context) {
+      // h 必须存在 指定作用域 同时生成vnode: h（‘div’,obj,[arg]）
+      // context 上下文对象
+      const { out, config } = context.props.model
+      const data = {
+        attrs: { ...config },
+      }
+      const result = (
+        <div class="mytest">
+          <span>{out.label}</span>
+          <yu-select {...data}></yu-select>
+        </div>
+      )
+      return result
+    },
+  }
+  ```

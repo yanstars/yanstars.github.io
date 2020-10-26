@@ -22,6 +22,11 @@ tags:
 - windows 下 `C:\Users\Administrator\.config`
 - linux `/Users/admins/.gitconfig`
 
+### 可视化工具
+
+- gitUi
+- sourceTree
+
 ### 代理 git
 
 #### 设置代理
@@ -59,6 +64,7 @@ git config --global --unset https.proxy
 
 ```md
 # [http "https://github.com"]
+
 # proxy = socks5://127.0.0.1:2080
 ```
 
@@ -77,7 +83,7 @@ git reset --hard dev2
 git push -f
 ```
 
-### 合并 bbb  >  aaa
+### 合并 bbb > aaa
 
 #### 单个 commit
 

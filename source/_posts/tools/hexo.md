@@ -13,8 +13,8 @@ updated: 2020 04 04
 
 #### 相关环境
 
-- node
-- git
+- node 12
+- git >2
 
 #### 安装 hexo
 
@@ -35,8 +35,8 @@ updated: 2020 04 04
 
 #### 安装主题 diaspora
 
-`$ cd blogname`
-`$ git clone https://github.com/Fechin/hexo-theme-diaspora.git themes/diaspora`
+` cd blogname`
+` git clone https://github.com/Fechin/hexo-theme-diaspora.git themes/diaspora`
 
 #### 配置使用主题 diaspora
 

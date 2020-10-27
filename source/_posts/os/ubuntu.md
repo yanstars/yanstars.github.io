@@ -41,5 +41,8 @@ categories: os
 - hide the top bar
 - v2rayL
 - nvm
+- put window
+  > 注意 zsh / ohmyzsh 中 nvm 的环境便利那个配置
+  > 若报错 删掉 ～/.nvm 重新安装
 
 #### 快捷键

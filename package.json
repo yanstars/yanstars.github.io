@@ -5,7 +5,7 @@
   "scripts": {
     "build": "hexo generate",
     "clean": "hexo clean",
-    "deploy": "hexo deploy && npm run yan && hexo clean",
+    "deploy": "hexo deploy",
     "yan": "scp -r  /Users/admins/Desktop/my/yanstars.github.io/public/*   root@59.110.238.56:/root/myapp/public",
     "server": "hexo server "
   },

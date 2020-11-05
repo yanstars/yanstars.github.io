@@ -114,3 +114,45 @@ vm.items.length = 2 // 不是响应性的
     },
   }
   ```
+
+- 监听
+
+  ```js
+  this.$on('hook:updated', () => {})
+  this.$once('hook:updated', () => {})
+  let result = this.$watch(
+    () => someObj,
+    (newValue, oldValue) => {},
+    { deep: true, immediate: true },
+  )
+  result() // 取消监听
+  ```
+
+- 自定义组件 v-model
+
+  ```js
+  export default {
+    model: {
+      props: '', // 自上而下传入的志
+      event: '', // 抛出的事件
+    },
+  }
+  ```
+
+- 利用函数实现过滤器效果(vue3 过滤器废除)
+- 作用域插槽
+
+  ```html
+  <!-- 子组件 -->
+  <slot :obj="item" name="key1">默认值</slot>
+
+  <!-- 父组件 -->
+  <child>
+    <template #key1="{item}">
+      <p>item</p>
+    </template>
+  </child>
+  ```
+
+- vuex 自定义 state 类，实现数据的同步，异步，集中管理
+- 组件的 key 值改变，会保证组件的渲染和数据更新，而不仅是内容和属性改变 （patch 算法）（重新进行生命周期）

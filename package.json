@@ -7,6 +7,7 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "yan": "scp -r  /Users/admins/Desktop/my/yanstars.github.io/public/*   root@59.110.238.56:/root/myapp/public",
+    "yan_home": "scp -r  /home/yanstars/桌面/my/yanstars.github.io/public/*   root@59.110.238.56:/root/myapp/public",
     "server": "hexo server "
   },
   "hexo": {

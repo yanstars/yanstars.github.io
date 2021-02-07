@@ -1,5 +1,5 @@
 ---
-title: VUE相关
+title: VEU Vnode and Diff
 date: 2021 02 05
 categories:
   - js
@@ -9,16 +9,14 @@ tags:
   - vue
 ---
 
-
-### data-> view
-
+## data-> view
 
 - createElm
 - removeVnodes
 - addVnodes
 - setTextContent
 
-```Mermaid 
+```Mermaid
 graph TB
 
 id1["_update"] --> print2["__patch"]
@@ -39,37 +37,36 @@ print5 --> print3["patch"]
 ### Vnode
 
 ```js
-
 export default class VNode {
-  tag: string | void;
-  data: VNodeData | void;
-  children: ?Array<VNode>;
-  text: string | void;
-  elm: Node | void;
-  ns: string | void;
-  context: Component | void; // rendered in this component's scope
-  key: string | number | void;
-  componentOptions: VNodeComponentOptions | void;
-  componentInstance: Component | void; // component instance
-  parent: VNode | void; // component placeholder node
+  tag: string | void
+  data: VNodeData | void
+  children: ?Array<VNode>
+  text: string | void
+  elm: Node | void
+  ns: string | void
+  context: Component | void // rendered in this component's scope
+  key: string | number | void
+  componentOptions: VNodeComponentOptions | void
+  componentInstance: Component | void // component instance
+  parent: VNode | void // component placeholder node
 
   // strictly internal
-  raw: boolean; // contains raw HTML? (server only)
-  isStatic: boolean; // hoisted static node
-  isRootInsert: boolean; // necessary for enter transition check
-  isComment: boolean; // empty comment placeholder?
-  isCloned: boolean; // is a cloned node?
-  isOnce: boolean; // is a v-once node?
-  asyncFactory: Function | void; // async component factory function
-  asyncMeta: Object | void;
-  isAsyncPlaceholder: boolean;
-  ssrContext: Object | void;
-  fnContext: Component | void; // real context vm for functional nodes
-  fnOptions: ?ComponentOptions; // for SSR caching
-  devtoolsMeta: ?Object; // used to store functional render context for devtools
-  fnScopeId: ?string; // functional scope id support
+  raw: boolean // contains raw HTML? (server only)
+  isStatic: boolean // hoisted static node
+  isRootInsert: boolean // necessary for enter transition check
+  isComment: boolean // empty comment placeholder?
+  isCloned: boolean // is a cloned node?
+  isOnce: boolean // is a v-once node?
+  asyncFactory: Function | void // async component factory function
+  asyncMeta: Object | void
+  isAsyncPlaceholder: boolean
+  ssrContext: Object | void
+  fnContext: Component | void // real context vm for functional nodes
+  fnOptions: ?ComponentOptions // for SSR caching
+  devtoolsMeta: ?Object // used to store functional render context for devtools
+  fnScopeId: ?string // functional scope id support
 
-  constructor (
+  constructor(
     tag?: string,
     data?: VNodeData,
     children?: ?Array<VNode>,
@@ -106,15 +103,15 @@ export default class VNode {
 
   // DEPRECATED: alias for componentInstance for backwards compat.
   /* istanbul ignore next */
-  get child (): Component | void {
+  get child(): Component | void {
     return this.componentInstance
   }
 }
 ```
 
-
 ### 遍历算法
-```Mermaid 
+
+```Mermaid
  graph TB
 1((1)) --> 2((2))
 1((1)) --> 3((3))
@@ -131,22 +128,23 @@ export default class VNode {
 
 
 ```
--  DFS  深度优先遍历(Depth First Search)  
-    > 栈
-    > 1  2  4  8   11   5      3  6   7  9  10 
 
+- DFS 深度优先遍历(Depth First Search)
 
--  BFS  广度优先遍历(Breath First Search) 
-    > 队列
-    > 1  2  3  4 11  5  6  7 8 9 10 
- 
+  > 栈
+  > 1 2 4 8 11 5 3 6 7 9 10
 
- - 二叉樹 
-    - 先序
-    - 中序
-    - 后序
+- BFS 广度优先遍历(Breath First Search)
 
-### patch
+  > 队列
+  > 1 2 3 4 11 5 6 7 8 9 10
+
+- 二叉樹
+  - 先序
+  - 中序
+  - 后序
+
+### patch()
 
 ```js
 return function patch(oldVnode, vnode, hydrating, removeOnly) {
@@ -169,7 +167,7 @@ return function patch(oldVnode, vnode, hydrating, removeOnly) {
     const isRealElement = isDef(oldVnode.nodeType)
     if (!isRealElement && sameVnode(oldVnode, vnode)) {
       // patch existing root node
-      // 是同一个节点  直接替换
+      // 是同一个节点  深入比较替换
       patchVnode(oldVnode, vnode, insertedVnodeQueue, null, null, removeOnly)
     } else {
       if (isRealElement) {
@@ -260,7 +258,7 @@ return function patch(oldVnode, vnode, hydrating, removeOnly) {
 }
 ```
 
-### patchVnode
+### patchVnode()
 
 ```JS
 function patchVnode (
@@ -271,7 +269,7 @@ function patchVnode (
     index,
     removeOnly
   ) {
-    //  Same memory address 
+    //  Same memory address
     if (oldVnode === vnode) {
       return
     }
@@ -320,16 +318,16 @@ function patchVnode (
       }
     }
     if (isUndef(vnode.text)) {     // no text
-      if (isDef(oldCh) && isDef(ch)) {  // both has children    dps   || true  && true 
+      if (isDef(oldCh) && isDef(ch)) {  // both has children    dps   || true  && true
         if (oldCh !== ch) updateChildren(elm, oldCh, ch, insertedVnodeQueue, removeOnly)
-      } else if (isDef(ch)) {       // node has child                                   
+      } else if (isDef(ch)) {       // node has child
         if (process.env.NODE_ENV !== 'production') {
           checkDuplicateKeys(ch)
         }
         if (isDef(oldVnode.text)) nodeOps.setTextContent(elm, '')           // if old has text  ,we set it as ''
         addVnodes(elm, null, ch, 0, ch.length - 1, insertedVnodeQueue)      // add Vnode children node
       } else if (isDef(oldCh)) {   //oldVnode  has children and delete it
-        removeVnodes(oldCh, 0, oldCh.length - 1)  
+        removeVnodes(oldCh, 0, oldCh.length - 1)
       } else if (isDef(oldVnode.text)) {
         nodeOps.setTextContent(elm, '')   // TODO 566
       }
@@ -344,9 +342,8 @@ function patchVnode (
 
 ```
 
-
-
 ### sameVnode()
+
 ```js
 function sameVnode(a, b) {
   return (
@@ -358,7 +355,6 @@ function sameVnode(a, b) {
   )
 }
 ```
-
 
 ### updateChildren
 
@@ -397,46 +393,45 @@ function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly
         patchVnode(oldEndVnode, newEndVnode, insertedVnodeQueue, newCh, newEndIdx)
         oldEndVnode = oldCh[--oldEndIdx]
         newEndVnode = newCh[--newEndIdx]
-      } else if (sameVnode(oldStartVnode, newEndVnode)) { // Vnode moved right SO real dom move right 
+      } else if (sameVnode(oldStartVnode, newEndVnode)) { // Vnode moved right SO real dom move right
         patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue, newCh, newEndIdx)
-        canMove && nodeOps.insertBefore(parentElm, oldStartVnode.elm, nodeOps.nextSibling(oldEndVnode.elm))
+        canMove && nodeOps.insertBefore(parentElm, oldStartVnode.elm, nodeOps.nextSibling(oldEndVnode.elm))  // move real dom
         oldStartVnode = oldCh[++oldStartIdx]
         newEndVnode = newCh[--newEndIdx]
       } else if (sameVnode(oldEndVnode, newStartVnode)) { // Vnode moved left
         patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
-        canMove && nodeOps.insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm)
+        canMove && nodeOps.insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm)  // move real dom
         oldEndVnode = oldCh[--oldEndIdx]
         newStartVnode = newCh[++newStartIdx]
       } else {
 
-        // <li v-for ="item in [1,2,3]" :key="item"> {{ item }}
+  
+        // [1,2,3]
+        if (isUndef(oldKeyToIdx)) oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)  //    old    {  1: 0  ,  2:1  , 3:2}
+
+        idxInOld = isDef(newStartVnode.key)  
+          ? oldKeyToIdx[newStartVnode.key]
+          : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx)
 
 
-        if (isUndef(oldKeyToIdx)) oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx)  //    old    {  1: 0  ,  2:1  , 3:2} 
-
-        idxInOld = isDef(newStartVnode.key)  // has key   3 
-          ? oldKeyToIdx[newStartVnode.key]  
-          : findIdxInOld(newStartVnode, oldCh, oldStartIdx, oldEndIdx)  
-          
-
-        if (isUndef(idxInOld)) { 
+        if (isUndef(idxInOld)) {
           // New element
           //  [2]
           //  [3]
           createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx)
-        } else {   
+        } else {
           // different index
           //  [5,2,3,6],
           //  [4,3,2,1]
-          vnodeToMove = oldCh[idxInOld]  
+          vnodeToMove = oldCh[idxInOld]
           if (sameVnode(vnodeToMove, newStartVnode)) {
             patchVnode(vnodeToMove, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
             oldCh[idxInOld] = undefined
             canMove && nodeOps.insertBefore(parentElm, vnodeToMove.elm, oldStartVnode.elm)
-          } else {  
+          } else {
             // same key but different element. treat as new element
-            //   old  li  key =3 
-            //   now   div key = 3 
+            //   old  li  key =3
+            //   now   div key = 3
             createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm, false, newCh, newStartIdx)
           }
         }
@@ -447,9 +442,222 @@ function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly
        //  [1，2]
        //  [4,2,1,3]
       refElm = isUndef(newCh[newEndIdx + 1]) ? null : newCh[newEndIdx + 1].elm
-      addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue)
+      addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue) // dom 
     } else if (newStartIdx > newEndIdx) {
-      removeVnodes(oldCh, oldStartIdx, oldEndIdx)
+      removeVnodes(oldCh, oldStartIdx, oldEndIdx)  // remove real dom 
     }
   }
 ```
+
+## exapmple
+
+### example1
+
+```Mermaid
+graph TB
+ E>old]
+ C((1))
+ d((''))
+ f((''))
+```
+
+```Mermaid
+graph TB
+ E>new]
+ C((1))
+ d((''))
+ g((''))
+```
+
+### example2
+
+```Mermaid
+
+graph TB
+ E>old]
+ C((''))
+ f((''))
+ e((2))
+```
+
+```Mermaid
+graph TB
+ E>new]
+ C((''))
+ d((''))
+ g((2))
+```
+
+### example3
+
+```Mermaid
+graph TB
+ E>old]
+ C((1))
+ f((''))
+ e((''))
+```
+
+```Mermaid
+graph TB
+ E>new]
+ C((''))
+ d((''))
+ g((1))
+```
+
+### example4
+
+```Mermaid
+graph TB
+ E>old]
+ C((''))
+ d((''))
+ e((1))
+```
+
+```Mermaid
+graph TB
+ E>new]
+ C((1))
+ d((''))
+ g((''))
+```
+
+### example5
+
+```Mermaid
+graph TB
+ E>old]
+ e((1))
+```
+
+```Mermaid
+graph TB
+ E>new]
+ C((2))
+```
+
+- 比较前
+
+![docker操作导向](/images/pre_patch.png)
+
+- patch 之后
+
+- ![docker操作导向](/images/patch.png)
+
+## dom 操作
+
+### addVnodes
+
+```js
+function addVnodes(parentElm, refElm, vnodes, startIdx, endIdx, insertedVnodeQueue) {
+  for (; startIdx <= endIdx; ++startIdx) {
+    createElm(vnodes[startIdx], insertedVnodeQueue, parentElm, refElm, false, vnodes, startIdx)
+  }
+}
+```
+
+### createElm
+
+```js
+function createElm(vnode, insertedVnodeQueue, parentElm, refElm, nested, ownerArray, index) {
+  if (isDef(vnode.elm) && isDef(ownerArray)) {
+    // This vnode was used in a previous render!
+    // now it's used as a new node, overwriting its elm would cause
+    // potential patch errors down the road when it's used as an insertion
+    // reference node. Instead, we clone the node on-demand before creating
+    // associated DOM element for it.
+    vnode = ownerArray[index] = cloneVNode(vnode)
+  }
+
+  vnode.isRootInsert = !nested // for transition enter check
+  if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
+    return
+  }
+
+  const data = vnode.data
+  const children = vnode.children
+  const tag = vnode.tag
+  if (isDef(tag)) {
+    if (process.env.NODE_ENV !== 'production') {
+      if (data && data.pre) {
+        creatingElmInVPre++
+      }
+      if (isUnknownElement(vnode, creatingElmInVPre)) {
+        warn(
+          'Unknown custom element: <' +
+            tag +
+            '> - did you ' +
+            'register the component correctly? For recursive components, ' +
+            'make sure to provide the "name" option.',
+          vnode.context
+        )
+      }
+    }
+
+    vnode.elm = vnode.ns ? nodeOps.createElementNS(vnode.ns, tag) : nodeOps.createElement(tag, vnode)
+    setScope(vnode)
+
+    /* istanbul ignore if */
+    if (__WEEX__) {
+      // in Weex, the default insertion order is parent-first.
+      // List items can be optimized to use children-first insertion
+      // with append="tree".
+      const appendAsTree = isDef(data) && isTrue(data.appendAsTree)
+      if (!appendAsTree) {
+        if (isDef(data)) {
+          invokeCreateHooks(vnode, insertedVnodeQueue)
+        }
+        insert(parentElm, vnode.elm, refElm)
+      }
+      createChildren(vnode, children, insertedVnodeQueue)
+      if (appendAsTree) {
+        if (isDef(data)) {
+          invokeCreateHooks(vnode, insertedVnodeQueue)
+        }
+        insert(parentElm, vnode.elm, refElm)
+      }
+    } else {
+      createChildren(vnode, children, insertedVnodeQueue)
+      if (isDef(data)) {
+        invokeCreateHooks(vnode, insertedVnodeQueue)
+      }
+      insert(parentElm, vnode.elm, refElm)
+    }
+
+    if (process.env.NODE_ENV !== 'production' && data && data.pre) {
+      creatingElmInVPre--
+    }
+  } else if (isTrue(vnode.isComment)) {
+    vnode.elm = nodeOps.createComment(vnode.text)
+    insert(parentElm, vnode.elm, refElm)
+  } else {
+    vnode.elm = nodeOps.createTextNode(vnode.text)
+    insert(parentElm, vnode.elm, refElm)
+  }
+}
+```
+
+### removeVnodes
+
+```js
+function removeVnodes(vnodes, startIdx, endIdx) {
+  for (; startIdx <= endIdx; ++startIdx) {
+    const ch = vnodes[startIdx]
+    if (isDef(ch)) {
+      if (isDef(ch.tag)) {
+        removeAndInvokeRemoveHook(ch)
+        invokeDestroyHook(ch)
+      } else {
+        // Text node
+        removeNode(ch.elm)
+      }
+    }
+  }
+}
+```
+
+### domApi
+
+- ![docker操作导向](/images/dom.png)

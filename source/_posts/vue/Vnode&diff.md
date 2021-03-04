@@ -111,7 +111,7 @@ export default class VNode {
 
 ### 遍历算法
 
-```Mermaid
+```mermaid
  graph TB
 1((1)) --> 2((2))
 1((1)) --> 3((3))
@@ -260,7 +260,7 @@ return function patch(oldVnode, vnode, hydrating, removeOnly) {
 
 ### patchVnode()
 
-```JS
+```js
 function patchVnode (
     oldVnode,
     vnode,
@@ -358,7 +358,7 @@ function sameVnode(a, b) {
 
 ### updateChildren
 
-```JS
+```js
 function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) {
     let oldStartIdx = 0
     let newStartIdx = 0

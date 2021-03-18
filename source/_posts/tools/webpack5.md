@@ -248,3 +248,12 @@ module.exports = merge(common, {
 
 - node package 和 webpack 的对应关系
 - package-lock.json 版本控制
+  - npm uninstall xx
+  - npm install xxx
+- optimize-css-assets-webpack-plugin 会重新计算 z-index 导致数值变化
+  - safe = true
+- webpack 本身支持 EsModule
+  - package.json 设置 "type": "module"
+  - 或者运行之前 --experimental-modules
+- purgecss-webpack-plugin glob ,只能配合 MiniCssExtractPlugin 使用。
+  - 拼接出来的 class 失效

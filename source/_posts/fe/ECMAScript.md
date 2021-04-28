@@ -66,12 +66,12 @@ tags:
 ### ES7
 
 - 指数运算符(幂): \*\*
-- Array.prototype.includes(value) : 判断数组中是否包含指定 value
+- Array.prototype.includes(value , firstIndex) : 判断数组中是否包含指定 value
 
 ### ES8
 
 - 字符串填充（padStart 和 padEnd）
-- Object.values
+- Object.values // 当把数字当做对象的键的时候，返回的数组以键的值升序排序
 - Object.entries
 - Object.getOwnPropertyDescriptors()
 - 函数参数列表和调用中的尾随逗号
@@ -81,7 +81,7 @@ tags:
 ### ES9
 
 - 对象的 Rest(结构)/Spread(扩展)
-- Asynchronous iteration 异步迭代
+- for await of 异步迭代
 - Promise.prototype.finally()
 - 正则 (lookahead) 先行断言/(lookbehind) 反向断言
 - 正则表达式 Unicode 转义\p{...}和\P{...}
@@ -106,11 +106,11 @@ tags:
 
 - \# 私有变量
 - Promise.allSettled 解决 promiese.all 中一个 reject 的缺陷
-- 空值合并运算符 (解决合法假值 '' , 0 )
-- 可选链运算符
+- ?? 空值合并运算符 (解决合法假值 '' , 0 )
+- ?. 可选链运算符
 - BigInt
 - dynamic-import 动态引入
-- globalThis
+- globalThis // window || self || global
 
 ### chromeV8
 
@@ -130,7 +130,7 @@ tags:
 
   ```js
   function add(x, y) {
-  	return x + y
+    return x + y
   }
 
   add(1, 5) //字节码执行
@@ -154,107 +154,3 @@ tags:
 - [ES7 (2016)](https://www.jianshu.com/p/df0d1fd010bb)
 - [ES6 (2015)](https://es6.ruanyifeng.com/#docs/arraybuffer)
 - [ES5 (2014)](https://www.w3school.com.cn/js/js_es5.asp)
-
-### Array && String
-
-- 相同
-
-```js
-let b = Object.getOwnPropertyNames(String.prototype)
-let a = Object.getOwnPropertyNames(Array.prototype)
-let c = b.filter((aitem) => a.includes(aitem))
-```
-
-| key        | Array                                                                                  | String                                   |
-| ---------- | -------------------------------------------------------------------------------------- | ---------------------------------------- |
-| 类属性     | ["length", "name", "prototype"]                                                        |                                          |
-| 类方法     | `["isArray", "from", "of"]                                                             | ["fromCharCode", "fromCodePoint", "raw"] |
-| 共同       | [ 'constructor', 'concat', 'includes', 'indexOf', 'lastIndexOf', 'slice', 'toString' ] |                                          |
-| 改变原对象 | [ 'copyWithin'，'pop','push','reverse','shift','sort','unshift','splice' ]             |                                          |
-
-| function       | 说明 | 返回值 | 是否改变原属组 |
-| -------------- | ---- | ------ | -------------- |
-| concat         |      |        |                |
-| constructor    |      |        |                |
-| copyWithin     |      |        |                |
-| entries        |      |        |                |
-| every          |      |        |                |
-| fill           |      |        |                |
-| filter         |      |        |                |
-| find           |      |        |                |
-| findIndex      |      |        |                |
-| flat           |      |        |                |
-| flatMap        |      |        |                |
-| forEach        |      |        |                |
-| includes       |      |        |                |
-| indexOf        |      |        |                |
-| join           |      |        |                |
-| keys           |      |        |                |
-| lastIndexOf    |      |        |                |
-| length         |      |        |                |
-| map            |      |        |                |
-| pop            |      |        |                |
-| push           |      |        |                |
-| reduce         |      |        |                |
-| reduceRight    |      |        |                |
-| reverse        |      |        |                |
-| shift          |      |        |                |
-| slice          |      |        |                |
-| some           |      |        |                |
-| sort           |      |        |                |
-| splice         |      |        |                |
-| toLocaleString |      |        |                |
-| toString       |      |        |                |
-| unshift        |      |        |                |
-| values         |      |        |                |
-
-| function          | 说明 | 返回值 | 是否改变原对象 |
-| ----------------- | ---- | ------ | -------------- |
-| anchor            |      |        |                |
-| big               |      |        |                |
-| blink             |      |        |                |
-| bold              |      |        |                |
-| charAt            |      |        |                |
-| charCodeAt        |      |        |                |
-| codePointAt       |      |        |                |
-| concat            |      |        |                |
-| constructor       |      |        |                |
-| endsWith          |      |        |                |
-| fixed             |      |        |                |
-| fontcolor         |      |        |                |
-| fontsize          |      |        |                |
-| includes          |      |        |                |
-| indexOf           |      |        |                |
-| italics           |      |        |                |
-| lastIndexOf       |      |        |                |
-| length            |      |        |                |
-| link              |      |        |                |
-| localeCompare     |      |        |                |
-| match             |      |        |                |
-| matchAll          |      |        |                |
-| normalize         |      |        |                |
-| padEnd            |      |        |                |
-| padStart          |      |        |                |
-| repeat            |      |        |                |
-| replace           |      |        |                |
-| search            |      |        |                |
-| slice             |      |        |                |
-| small             |      |        |                |
-| split             |      |        |                |
-| startsWith        |      |        |                |
-| strike            |      |        |                |
-| sub               |      |        |                |
-| substr            |      |        |                |
-| substring         |      |        |                |
-| sup               |      |        |                |
-| toLocaleLowerCase |      |        |                |
-| toLocaleUpperCase |      |        |                |
-| toLowerCase       |      |        |                |
-| toString          |      |        |                |
-| toUpperCase       |      |        |                |
-| trim              |      |        |                |
-| trimEnd           |      |        |                |
-| trimLeft          |      |        |                |
-| trimRight         |      |        |                |
-| trimStart         |      |        |                |
-| valueOf           |      |        |                |

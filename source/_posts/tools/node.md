@@ -2,8 +2,8 @@
 title: NODEJS
 date: 2020 03 27
 tags:
-    - js
-    - node
+  - js
+  - node
 categories: node
 updated: 2020 04 05
 ---
@@ -12,26 +12,26 @@ updated: 2020 04 05
 
 #### 特点
 
--   异步 I/O
--   事件回调
--   跨平台
--   单线程(js 执行线程,I/O,网络单独线程)
+- 异步 I/O
+- 事件回调
+- 跨平台
+- 单线程(js 执行线程,I/O,网络单独线程)
 
--   Node.js 是单进程单线程[针对 js 执行引擎]应用程序，但是因为 V8 引擎提供的异步执行回调接口，通过这些接口可以处理大量的并发，所以性能非常高。
--   Node.js 几乎每一个 API 都是支持回调函数的。
--   Node.js 基本上所有的事件机制都是用设计模式中观察者模式实现。
--   Node.js 单线程类似进入一个 while(true)的事件循环，直到没有事件观察者退出，每个异步事件都生成一个事件观察者，如果有事件发生就调用该回调函数.
+- Node.js 是单进程单线程[针对 js 执行引擎]应用程序，但是因为 V8 引擎提供的异步执行回调接口，通过这些接口可以处理大量的并发，所以性能非常高。
+- Node.js 几乎每一个 API 都是支持回调函数的。
+- Node.js 基本上所有的事件机制都是用设计模式中观察者模式实现。
+- Node.js 单线程类似进入一个 while(true)的事件循环，直到没有事件观察者退出，每个异步事件都生成一个事件观察者，如果有事件发生就调用该回调函数.
 
 #### 自动重启工具
 
--   `npm -g install supervisor`
-    `supervisor app.js`
+- `npm -g install supervisor`
+  `supervisor app.js`
 
--   `npm i -g nodemon`
-    `nodemon app.js`
+- `npm i -g nodemon`
+  `nodemon app.js`
 
--   `npm i -g pm2`
-    `pm2 start app.js`
+- `npm i -g pm2`
+  `pm2 start app.js`
 
 #### 事件循环
 
@@ -46,24 +46,99 @@ updated: 2020 04 05
 
 #### 各个阶段
 
--   timers 阶段：这个阶段执行 timer（setTimeout、setInterval）的回调
--   I/O callbacks 阶段：处理一些上一轮循环中的少数未执行的 I/O 回调
--   idle, prepare 阶段：仅 node 内部使用
--   poll 阶段：获取新的 I/O 事件, 适当的条件下 node 将阻塞在这里
--   check 阶段：执行 setImmediate() 的回调
--   close callbacks 阶段：执行 socket 的 close 事件回调
+- timers 阶段：这个阶段执行 timer（setTimeout、setInterval）的回调
+- I/O callbacks 阶段：处理一些上一轮循环中的少数未执行的 I/O 回调
+- idle, prepare 阶段：仅 node 内部使用
+- poll 阶段：获取新的 I/O 事件, 适当的条件下 node 将阻塞在这里
+- check 阶段：执行 setImmediate() 的回调
+- close callbacks 阶段：执行 socket 的 close 事件回调
 
 #### 对比浏览器
 
--   浏览器和 Node 环境下，microtask 任务队列的执行时机不同
--   Node 端，microtask 在事件循环的各个阶段之间执行
--   浏览器端，microtask 在事件循环的 macrotask 执行完之后执行
+- 浏览器和 Node 环境下，microtask 任务队列的执行时机不同
+- Node 端，microtask 在事件循环的各个阶段之间执行
+- 浏览器端，microtask 在事件循环的 macrotask 执行完之后执行
 
--   当每个阶段完成后，如果存在 nextTick 队列，就会清空队列中的所有回调函数，并且优先于其他 microtask 执行
--   process.nextTick 和 Promise 的回调函数，追加在本轮循环，即同步任务一旦执行完成，就开始执行它们。而 setTimeout、setInterval、setImmediate 的回调函数，追加在次轮循环。
--   [链接](https://blog.csdn.net/Fundebug/article/details/86487117)
+- 当每个阶段完成后，如果存在 nextTick 队列，就会清空队列中的所有回调函数，并且优先于其他 microtask 执行
+- process.nextTick 和 Promise 的回调函数，追加在本轮循环，即同步任务一旦执行完成，就开始执行它们。而 setTimeout、setInterval、setImmediate 的回调函数，追加在次轮循环。
+- [链接](https://blog.csdn.net/Fundebug/article/details/86487117)
 
 #### 传递参数
 
--   基本类型 传递的参数赋值给函数的局部变量
--   引用类型 复制地址 局部变量的变化会反映到函数外部
+- 基本类型 传递的参数赋值给函数的局部变量
+- 引用类型 复制地址 局部变量的变化会反映到函数外部
+
+#### 发送一个 http 请求
+
+```js
+const http = require('http')
+const httpRequest = (data, api) => {
+  const options = {
+    hostname: 'test-fenhao.shebao.net',
+    port: 443,
+    path: api,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      token: '68FCC10D17DA063E696CF4B0D95387CDB2694880EC06517E431563106BAD07C1790EC03EC159C7397E2F63C1E7F983E34650A00ED6BD7321',
+    },
+  }
+  return new Promise((resolve, rej) => {
+    const req = https.request(options, res => {
+      let str = ''
+      res.on('data', e => {
+        str += e
+      })
+      res.on('end', function () {
+        resolve(JSON.parse(str))
+      })
+    })
+    req.on('error', error => {
+      console.error('http -----', error)
+      rej()
+    })
+    req.write(Buffer.from(JSON.stringify(data)).toString())
+    req.end()
+  })
+}
+```
+
+#### 从终端获取制定问题答案
+
+```js
+;(async () => {
+  const Q = ['name  ?   ', 'age ?   ', 'location ?   ']
+
+  const cb2promise = fn => (...args) =>
+    new Promise(res => {
+      args.push((...ars) => {
+        res(ars)
+      })
+      fn.apply(null, args)
+    })
+
+  async function getAnswers(
+    Q,
+    obj = {
+      length: 20,
+      trim: true,
+    }
+  ) {
+    const { length, trim } = obj
+    const answer = {}
+    const readline = require('readline').createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    })
+    for (const item of Q) {
+      const [c] = await cb2promise(readline.question.bind(readline))(item.padEnd(length))
+      answer[item] = trim ? c.trim() : c
+    }
+    readline.close()
+    return answer
+  }
+
+  const answer = await getAnswers(Q, { length: 50 })
+  console.table([answer], Q)
+})(this)
+```

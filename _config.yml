@@ -114,7 +114,7 @@ theme: hexo-theme-matery
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:yanstars/yanstars.github.io.git
+  repo: https://github.com/yanstars/yanstars.github.io.git
   branch: master
   message: add neat
 

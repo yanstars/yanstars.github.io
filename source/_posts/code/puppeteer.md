@@ -8,7 +8,9 @@ tags:
 categories: Node
 ---
 
-###
+### puppeteer
+
+- puppeteer 无头浏览器访问问卷星，模拟用户做页面操作
 
 ```js
 ;(async () => {

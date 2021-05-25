@@ -30,12 +30,6 @@ tags:
     "@babel/core": "^7.13.8",
     "babel-loader": "^8.2.2",
     "@babel/preset-env": "^7.13.9",
-    // PLUGIN
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.13.8",
-    "@babel/plugin-proposal-optional-chaining": "^7.13.8",
-    "@babel/plugin-proposal-pipeline-operator": "^7.12.13",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-decorators": "^7.13.5",
 ```
 
 ### CSS
@@ -79,68 +73,68 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
-  resolve: {
-    mainFields: ['jsnext:main', 'module', 'browser', 'main'],
-    extensions: ['.js', '.vue', '.json'],
-    alias: {
-      vue$: 'vue/dist/vue.esm.js',
-    },
-  },
-  entry: {
-    index: './src/index.js',
-    // index: {
-    //   import: './src/index.js',
-    //   dependOn: 'shared',
-    // },
-    // ui: {
-    //   import: './src/ui.js',
-    //   dependOn: 'shared',
-    // },
-    // shared: 'vue',
-  },
-  plugins: [
-    new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      // title: 'Production', title 和 tempalte 起,冲突
-      template: './index.html',
-    }),
-    new webpack.DefinePlugin({
-      RUN_ENV: JSON.stringify(process.env.RUN_ENV),
-    }),
-  ],
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    clean: true, //  不需要 CleanWebpackPlugin  了  webpack5.2新增
-  },
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        use: {
-          loader: 'vue-loader',
-        },
-      },
-      {
-        test: /\.m?js$/,
-        exclude: file => /node_modules/.test(file) && !/\.vue\.js/.test(file),
-        use: {
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-          },
-        },
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
-      },
-    ],
-  },
+	resolve: {
+		mainFields: ['jsnext:main', 'module', 'browser', 'main'],
+		extensions: ['.js', '.vue', '.json'],
+		alias: {
+			vue$: 'vue/dist/vue.esm.js',
+		},
+	},
+	entry: {
+		index: './src/index.js',
+		// index: {
+		//   import: './src/index.js',
+		//   dependOn: 'shared',
+		// },
+		// ui: {
+		//   import: './src/ui.js',
+		//   dependOn: 'shared',
+		// },
+		// shared: 'vue',
+	},
+	plugins: [
+		new VueLoaderPlugin(),
+		new HtmlWebpackPlugin({
+			// title: 'Production', title 和 tempalte 起,冲突
+			template: './index.html',
+		}),
+		new webpack.DefinePlugin({
+			RUN_ENV: JSON.stringify(process.env.RUN_ENV),
+		}),
+	],
+	output: {
+		filename: '[name].bundle.js',
+		path: path.resolve(__dirname, 'dist'),
+		clean: true, //  不需要 CleanWebpackPlugin  了  webpack5.2新增
+	},
+	module: {
+		rules: [
+			{
+				test: /\.vue$/,
+				use: {
+					loader: 'vue-loader',
+				},
+			},
+			{
+				test: /\.m?js$/,
+				exclude: (file) => /node_modules/.test(file) && !/\.vue\.js/.test(file),
+				use: {
+					loader: 'babel-loader',
+					options: {
+						cacheDirectory: true,
+					},
+				},
+			},
+			{
+				test: /\.(png|svg|jpg|jpeg|gif)$/i,
+				type: 'asset/resource',
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/i,
+				type: 'asset/resource',
+			},
+		],
+	},
 }
 ```
 
@@ -150,28 +144,28 @@ module.exports = {
 const { merge } = require('webpack-merge')
 const common = require('./webpack.common.js')
 module.exports = merge(common, {
-  mode: 'development',
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './dist',
-    hot: true, // 设置此选项后 ， 默认添加 HMR plugin
-    quiet: true,
-    compress: true,
-  },
-  target: 'web', // webpack5存在 热更新失效bug 设置该选项可暂时解决，不知道官方是否修复
-  module: {
-    rules: [
-      {
-        test: /\.(scss|css)$/,
-        use: [
-          'style-loader',
-          { loader: 'css-loader', options: { sourceMap: true, importLoaders: 2 } },
-          { loader: 'postcss-loader', options: { sourceMap: true } },
-          { loader: 'sass-loader', options: { sourceMap: true } },
-        ],
-      },
-    ],
-  },
+	mode: 'development',
+	devtool: 'inline-source-map',
+	devServer: {
+		contentBase: './dist',
+		hot: true, // 设置此选项后 ， 默认添加 HMR plugin
+		quiet: true,
+		compress: true,
+	},
+	target: 'web', // webpack5存在 热更新失效bug 设置该选项可暂时解决，不知道官方是否修复
+	module: {
+		rules: [
+			{
+				test: /\.(scss|css)$/,
+				use: [
+					'style-loader',
+					{ loader: 'css-loader', options: { sourceMap: true, importLoaders: 2 } },
+					{ loader: 'postcss-loader', options: { sourceMap: true } },
+					{ loader: 'sass-loader', options: { sourceMap: true } },
+				],
+			},
+		],
+	},
 })
 ```
 
@@ -186,54 +180,54 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = merge(common, {
-  module: {
-    rules: [
-      {
-        test: /\.(scss|css)$/,
-        use: [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { importLoaders: 2, sourceMap: false } }, 'postcss-loader', 'sass-loader'],
-      },
-    ],
-  },
+	module: {
+		rules: [
+			{
+				test: /\.(scss|css)$/,
+				use: [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { importLoaders: 2, sourceMap: false } }, 'postcss-loader', 'sass-loader'],
+			},
+		],
+	},
 
-  mode: 'production',
-  externals: {
-    vue: 'Vue',
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.json'],
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'style/[name].css',
-    }),
-    new OptimizeCssAssetsWebpackPlugin(), // 压缩css
-  ],
-  optimization: {
-    minimize: true, // 开始最小化
-    minimizer: [new TerserWebpackPlugin(), new CssMinimizerPlugin()],
-    splitChunks: {
-      cacheGroups: {
-        vendors: {
-          name: 'chunk-vendors',
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-          chunks: 'initial',
-        },
-        common: {
-          name: 'chunk-common',
-          minChunks: 2,
-          priority: -20,
-          chunks: 'initial',
-          reuseExistingChunk: true,
-        },
-      },
-    },
-  },
-  performance: {
-    hints: false,
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
-  },
+	mode: 'production',
+	externals: {
+		vue: 'Vue',
+	},
+	resolve: {
+		extensions: ['.js', '.jsx', '.json'],
+	},
+	plugins: [
+		new MiniCssExtractPlugin({
+			filename: 'style/[name].css',
+		}),
+		new OptimizeCssAssetsWebpackPlugin(), // 压缩css
+	],
+	optimization: {
+		minimize: true, // 开始最小化
+		minimizer: [new TerserWebpackPlugin(), new CssMinimizerPlugin()],
+		splitChunks: {
+			cacheGroups: {
+				vendors: {
+					name: 'chunk-vendors',
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10,
+					chunks: 'initial',
+				},
+				common: {
+					name: 'chunk-common',
+					minChunks: 2,
+					priority: -20,
+					chunks: 'initial',
+					reuseExistingChunk: true,
+				},
+			},
+		},
+	},
+	performance: {
+		hints: false,
+		maxEntrypointSize: 512000,
+		maxAssetSize: 512000,
+	},
 })
 ```
 
@@ -243,6 +237,28 @@ module.exports = merge(common, {
 - prettier
 - node-notifier
 - copy-webpack-plugin
+
+### .babelrc
+
+```json
+{
+	"presets": [
+		[
+			"@babel/preset-env", // 默认不处理api
+			{
+				"modules": false,
+				"useBuiltIns": "usage", // 处理api 默认为false ，即不处理
+				"corejs": 3
+			}
+		]
+	]
+}
+```
+
+- useBuiltIns
+  - fasle 默认不处理 api ，只转换语法
+  - usage 按需加载 polyfill
+  - entry 手动 引入 @babel/polyfill (core-js ,regenerator-runtime)
 
 ### ！！
 

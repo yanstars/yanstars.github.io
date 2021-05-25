@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 爱的魔力转圈圈
+title: 魔力转圈圈
 subtitle: '不会去死，不去会死'
 description: ''
 keywords: '严星星'
@@ -14,7 +14,7 @@ timezone: ''
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 # url: http://yoursite.com
-url:  https://yanstars.github.io/
+url: https://yanstars.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -30,7 +30,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render: "diy/**/*"
+skip_render: 'diy/**/*'
 
 # skip_render: "mypage/**/*"
 # Writing
@@ -118,28 +118,25 @@ deploy:
   branch: master
   message: add neat
 
-
 search:
-    path: search.xml
-    field: post
-    format: html
-    limit: 10000
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
 
 neat_enable: true
 
 neat_js:
-    enable: true
-    mangle: true
-    output:
-    compress:
-    exclude:
-        - '*.min.js'
+  enable: true
+  mangle: true
+  output:
+  compress:
+  exclude:
+    - '*.min.js'
 neat_css:
-    enable: true
-    exclude:
-        - '*.min.css'
+  enable: true
+  exclude:
+    - '*.min.css'
 neat_html:
-    enable: true
-    exclude:
-
-      
+  enable: true
+  exclude:

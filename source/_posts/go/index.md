@@ -6,8 +6,6 @@ tags:
 categories: GO
 ---
 
-
-
 ### 关于特性缺失
 
 - 为了简化设计，不支持函数重载和操作符重载
@@ -60,3 +58,11 @@ make             // 创建复杂类型 返回指针,使用.时自动展开
   - chan
   - map
   - time.Time
+
+### 资料链接
+
+- [《The Way to Go》中文译本，中文正式名《Go 入门指南》](https://github.com/unknwon/the-way-to-go_ZH_CN)
+- [gobyexample](https://github.com/mmcgrana/gobyexample)
+- [GO playground](https://github.com/x1unix/go-playground)
+- [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang)
+- [Go 语言高级编程](https://github.com/chai2010/advanced-go-programming-book)

@@ -59,6 +59,78 @@ vm.items.length = 2 // 不是响应性的
 第二类
 `vm.items.splice(newLength)`
 
+#### 优化点
+
+> 在 vue 源码中 core/observe/index.js 中进行了 data 的数据劫持和观察操作，其中 observe 源码如下:
+
+```js
+export function observe(value: any, asRootData: ?boolean): Observer | void {
+  if (!isObject(value) || value instanceof VNode) {
+    return
+  }
+  let ob: Observer | void
+  if (hasOwn(value, '__ob__') && value.__ob__ instanceof Observer) {
+    ob = value.__ob__
+  } else if (shouldObserve && !isServerRendering() && (Array.isArray(value) || isPlainObject(value)) && Object.isExtensible(value) && !value._isVue) {
+    ob = new Observer(value)
+  }
+  if (asRootData && ob) {
+    ob.vmCount++
+  }
+  return ob
+}
+```
+
+> 我们注意到 ` Object.isExtensible(value)`这个操作,如果为 false ，直接 return ob 不对该对象进行观察。
+> MDN 解释道
+> Object.isExtensible() 方法判断一个对象是否是可扩展的（是否可以在它上面添加新的属性）。
+
+```js
+// 新对象默认是可扩展的.
+var empty = {}
+Object.isExtensible(empty) // === true
+
+// ...可以变的不可扩展.
+Object.preventExtensions(empty)
+Object.isExtensible(empty) // === false
+```
+
+> 同时还有几个其他的 Object 静态方法
+
+```js
+Object.freeze()
+// 可以冻结一个对象。一个被冻结的对象再也不能被修改；冻结了一个对象则不能向这个对象添加新的属性，不能删除已有属性，
+// 不能修改该对象已有属性的可枚举性、可配置性、可写性，以及不能修改已有属性的值。
+// 此外，冻结一个对象后该对象的原型也不能被修改。
+// freeze() 返回和传入的参数相同的对象。
+// 浅冻结  即 内部的引用类型的值任然可以修改，操作
+Object.isFrozen(obj)
+// 判断一个对象是否被冻结。
+
+Object.seal()
+// 封闭一个对象，阻止添加新属性并将所有现有属性标记为不可配置。当前属性的值只要原来是可写的就可以改变。
+
+Object.isSealed()
+// 判断一个对象是否被密封。
+
+Object.preventExtensions()
+// 让一个对象变的不可扩展，也就是永远不能再添加新的属性。
+```
+
+> TIP
+> <span style="color:red">
+> 所以 ，在 vue data 返回的属性中，进行 `freeze` `seal` `preventExtensions` 操作的数据会跳过 `Observer` 阶段，从而避免了数据的深层递归观察。所以对 vm 中某些不需要响应式变化的固定值，采用上面的方式冻结对象，优化速度 vue initData 的速度，同时节约内存消耗。
+> eg:
+
+- table 表头
+- 固定的下拉框枚举(最好采用字典，动态获取)
+- 确定不会改变的文案
+- 一些静态数据
+- 表单的校验条件
+- 全局自定义挂在的方法
+- ...
+
+</span>
 ### router
 
 - 原理 : 通过这两种方式改变地址栏不会发送请求
@@ -123,7 +195,7 @@ vm.items.length = 2 // 不是响应性的
   let result = this.$watch(
     () => someObj,
     (newValue, oldValue) => {},
-    { deep: true, immediate: true },
+    { deep: true, immediate: true }
   )
   result() // 取消监听
   ```

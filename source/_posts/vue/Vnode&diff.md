@@ -355,6 +355,9 @@ function sameVnode(a, b) {
 
 ### updateChildren
 
+> 双端比较算法，两个 Vnode 数组
+> 找出差异的同时，完成需要修改的 dom 视图操作
+
 ```js
 function updateChildren(parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) {
   let oldStartIdx = 0

@@ -1,5 +1,5 @@
 ---
-title: vue3 新特性
+title: vue3
 date: 2020-09-17
 tags:
   - vue
@@ -8,128 +8,65 @@ tags:
 
 ### 新特性
 
-- Composition API
+#### 常用的 Composition API
 
-  - 清晰的代码结构
-  - 消除重复逻辑
+- getCurrentInstance
+- defineComponent
+- defineAsyncComponent
+- setup
+- ref
+- reactive
+- watchEffect
+- toRef
+- toRefs
+- provide
+- inject
+- readOnly
+- renderList
+- nextTick
 
-    ```html
-    <template>
-      <div class="counter">
-        <p>count: {{ count }}</p>
-        <p>NewVal (count + 2): {{ countDouble }}</p>
-        <button @click="inc">Increment</button>
-        <button @click="dec">Decrement</button>
-        <p>Message: {{ msg }}</p>
-        <button @click="changeMessage()">Change Message</button>
-      </div>
-    </template>
-    ```
+#### script setup Api
 
-    ```js
-    <script>
-    import { ref, computed, watch } from "vue";
-    export default {
-    setup() {
-        /* ---------------------------------------------------- */
-        let count = ref(0);
-        const countDouble = computed(() => count.value * 2);
-        watch(count, (newVal) => {
-        console.log("count changed", newVal);
-        });
-        const inc = () => {
-        count.value += 1;
-        };
-        const dec = () => {
-        if (count.value !== 0) {
-            count.value -= 1;
-        }
-        };
-        /* ---------------------------------------------------- */
-        let msg = ref("some text");
-        watch(msg, (newVal) => {
-        console.log("msg changed", newVal);
-        });
-        const changeMessage = () => {
-        msg.value = "new Message";
-        };
-        /* ---------------------------------------------------- */
-        return {
-        count,
-        inc,
-        dec,
-        countDouble,
-        msg,
-        changeMessage,
-        };
-    },
-    };
-    </script>
-    ```
+- defineProps
+- defineEmit
+- renderSlots
+- useContext
+- h
 
-- Multiple root elements
+#### example
 
-- Suspense
+```js
+// setup Component
+defineComponent({
+  setup(props, { attrs, slots, emit, expose }) {
+    ...
+    return {}   // 合并data
+    // return ()=>{}   render
+  },
+})
 
-  - Suspense 的出现大大简化了这个过程：它提供了 default 和 fallback 两种状态：
-  -
+```
 
-  ```html
-      <template>
-        <Suspense>
-            <template #default>
-            <div v-for="item in articleList" :key="item.id">
-                <article>
-                <h2>{{ item.title }}</h2>
-                <p>{{ item.body }}</p>
-                </article>
-            </div>
-            </template>
-            <template #fallback>
-            Articles loading...
-            </template>
-        </Suspense>
-    </template
-  ```
+```html
+<!-- script setup   -->
 
-- Multiple v-models
+<script setup>
+  const props = defineProps({
+    title: String,
+  })
+  // props.title
+  const { slots, attrs } = useContext()
+  // 获取 emit
+  const emit = defineEmit(['chang-name'])
+  // 调用 emit
+  emit('chang-name', 'Tom')
+</script>
+```
 
-  - 允许绑定多个 v-model
-  - 子组件
+### 新的组件
 
-  ```html
-  <template>
-    <div>
-      <label>Name: </label>
-      <input :value="name" @input="updateName($event.target.value)" />
-      <label>Age: </label>
-      <input :value="age" @input="updateAge($event.target.value)" />
-    </div>
-  </template>
-  ```
+#### Fragment(片断)
 
-  ```js
-  export default {
-    props: {
-      name: String,
-      age: Number,
-    },
-    setup(props, { emit }) {
-      const updateName = value => {
-        emit('update:name', value)
-      }
-      const updateAge = value => {
-        emit('update:age', +value)
-      }
-      return { updateName, updateAge }
-    },
-  }
-  ```
+#### Teleport(瞬移)
 
-- 父组件
-
-  ```html
-  <template>
-    <survey-form v-model:name="name" v-model:age="age"> {" "} </survey-form>
-  </template>
-  ```
+#### Suspense(不确定的)

@@ -6,8 +6,8 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "yan": "scp -r  /Users/admins/yanstars.github.io/public/*    root@59.110.238.56:/usr/blog",
-    "yan_home": "scp -r C:/Users/yan/Desktop/yanstars.github.io/public/*   root@59.110.238.56:/usr/www/blog",
+    "yan": "scp -r  /Users/admins/github/yanstars.github.io/public/*    root@59.110.238.56:/usr/blog",
+    "yan_home": "scp -r C:/Users/yan/Desktop/yanstars.github.io/public/*   root@59.110.238.56:/usr/www/topblog",
     "server": "hexo server "
   },
   "hexo": {

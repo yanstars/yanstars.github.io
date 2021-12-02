@@ -6,7 +6,7 @@ tags:
   - macos
 ---
 
-> 快速开始工具
+> quick start for macos
 
 #### [homeBrew](https://brew.sh/)
 
@@ -18,6 +18,28 @@ tags:
 
 /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
 ```
+
+##### brew cask
+
+> 安装部分图形界面软件
+> google chrome , firefox , wps , wechat wechart for work [more...](https://formulae.brew.sh/cask/)
+
+- 截图工具
+  ```bash
+  brew install --cask snipaste
+  ```
+- 科学上网
+  ```bash
+  brew install --cask clashx
+  ```
+- 网络代理
+  ```bash
+  brew install --cask proxyman
+  ```
+- docker desktop
+  ```bash
+  brew install --cask docker
+  ```
 
 ###
 

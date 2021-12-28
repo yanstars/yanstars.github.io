@@ -7,6 +7,7 @@ archives: Archives
 about: About
 contact: Contact
 friends: Friends
+galleries: galleries
 startRead: Start
 recommendedPosts: Recommended Posts
 publishDate: Publish Date
@@ -72,3 +73,10 @@ checkPolicy: more
 siteTotalWords: Total Words
 siteTotalVisits: Total visits
 siteTotalVisitors: Total visitors
+Index: Index
+Tags: Tags
+Categories: Categories
+Archives: Archives
+About: About
+Contact: Contact
+Friends: Friends

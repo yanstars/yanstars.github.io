@@ -37,3 +37,10 @@ tags: network server
 - proxy
 - vue-router-history
 - cache
+
+### 🐛
+
+- 在多层代理转发过程中 `content-encoding: gzip` 压缩头丢失 , 配置文件中修改为`gzip_http_version : 1.0`
+
+- 文件服务器中,注意文件的访问权限， 否则 `403`
+- 保证`gzip_types` `gzip_min_length` 和预期一致

@@ -414,7 +414,7 @@ verifyPassword:
 # busuanzi(http://busuanzi.ibruce.info/) website statistics
 # 不蒜子(http://busuanzi.ibruce.info/) 网站统计
 busuanziStatistics:
-  enable: false
+  enable: true
   totalTraffic: true # 总访问量
   totalNumberOfvisitors: true # 总人次
 
@@ -422,13 +422,14 @@ busuanziStatistics:
 # 添加 Google Analytics 配置
 googleAnalytics:
   enable: false
-  id:
+  id: G-XM3QP9CEC2
+  # id: 3137825718
 
 # Add baidu analytics configuration
 # 添加 baidu Analytics 配置
 baiduAnalytics:
-  enable: false
-  id:
+  enable: true
+  id: b29869385559e789a809e530775de1d8
 
 # 百度搜索资源平台提交链接
 baiduPush: false
